@@ -17,7 +17,7 @@ function Colaboracion({ agregarLibro }) {
             autor,
             genero,
             descripcion,
-            imagen: "/imagenes/PortadaGenerica.jpg",
+            imagen: "imagenes/PortadaGenerica.jpg",
         };
 
         agregarLibro(libroNuevo);

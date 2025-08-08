@@ -5,7 +5,7 @@ const generos = [
     destacado: {
       titulo: "HeartStopper",
       autor: "Por Alice Oseman",
-      imagen: "/imagenes/PortadaHeartStopper.jpeg"
+      imagen: `${import.meta.env.BASE_URL}imagenes/PortadaHeartStopper.jpeg`
     }
   },
   {
@@ -14,7 +14,7 @@ const generos = [
     destacado: {
       titulo: "Psicopatologia de la vida cotidiana",
       autor: "Por Sigmund Freud",
-      imagen: "/imagenes/PortadaCotidiana.gif"
+      imagen: `${import.meta.env.BASE_URL}imagenes/PortadaCotidiana.gif`
     }
   },
   {
@@ -23,7 +23,7 @@ const generos = [
     destacado: {
       titulo: "El instituto",
       autor: "Por Stephen King",
-      imagen: "/imagenes/PortadaInstituto.jpeg"
+      imagen: `${import.meta.env.BASE_URL}imagenes/PortadaInstituto.jpeg`
     }
   },
   {
@@ -32,7 +32,7 @@ const generos = [
     destacado: {
       titulo: "El problema de los 3 cuerpos",
       autor: "Por Cixin Liu",
-      imagen: "/imagenes/Portada3Cuerpos.jpeg"
+      imagen: `${import.meta.env.BASE_URL}imagenes/Portada3Cuerpos.jpeg`
     }
   }
 ];
