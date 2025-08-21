@@ -1,9 +1,11 @@
+// main.jsx o index.jsx
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
-import './estilos/estilo.css'
+import { BrowserRouter } from 'react-router-dom'
+
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  <BrowserRouter basename="/cronicas-de-tinta/">
     <App />
-  </React.StrictMode>
+  </BrowserRouter>
 )
