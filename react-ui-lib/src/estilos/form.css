@@ -1,6 +1,6 @@
 .input-bg{
-    background-color: #ffaebc;
-    width: 300px;
+    background-color: pink;
+    width: 650px;
     border-radius: 50px;
     height: 40px;
     border: none;
@@ -12,10 +12,6 @@ input{
     cursor: pointer;
 }
 
-.sexoclass{
-    margin-bottom: 0;
-}
-
 input[type="submit"] {
     width: 100px;
     margin-top: 20px;
@@ -24,6 +20,11 @@ input[type="submit"] {
     margin: 25px auto 0 auto;
 }
 
+input[type="submit"]:hover {
+    background-color: grey;
+    transform: scale(1.2);
+
+}
 
 label{
     font-weight: bold;
@@ -33,7 +34,7 @@ label{
 
 .input-bg-contacto{
     background-color: pink;
-    width: 250px;
+    width: 550px;
     border-radius: 50px;
     height: 40px;
     border: none;

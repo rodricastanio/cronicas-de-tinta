@@ -9,7 +9,7 @@ const generos = [
     }
   },
   {
-    id: "psicología",
+    id: "psicologia",
     nombre: "Psicología",
     destacado: {
       titulo: "Psicopatologia de la vida cotidiana",
@@ -27,7 +27,7 @@ const generos = [
     }
   },
   {
-    id: "cienciaficción",
+    id: "cienciaficcion",
     nombre: "Ciencia Ficción",
     destacado: {
       titulo: "El problema de los 3 cuerpos",

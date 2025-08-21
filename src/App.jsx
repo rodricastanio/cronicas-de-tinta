@@ -17,18 +17,18 @@ function App() {
   };
 
   return (
-    <BrowserRouter basename="/cronicas-de-tinta">
+    <BrowserRouter>
       <Routes>
-        <Route path="" element={<Layout />}>
+        <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="registro" element={<Registro />} />
           <Route path="contacto" element={<Contacto />} />
           <Route path="secciones" element={<Secciones libros={libs} />} />
+
           <Route path="colaboracion" element={<Colaboracion agregarLibro={agregarLibro} />} />
         </Route>
       </Routes>
     </BrowserRouter>
-
   );
 }
 
