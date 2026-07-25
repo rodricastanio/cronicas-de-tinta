@@ -1,74 +1,112 @@
-import generos from "../utils/generos"; // array de objetos {id, nombre}
+import generos from "../utils/generos";
 import TarjetaLibro from "../componentes/TarjetaLibro";
 import { useState } from "react";
 
 function Secciones({ libros }) {
   const [busqueda, setBusqueda] = useState("");
-  const [categoriaFiltro, setCategoriaFiltro] = useState("");
+  const [filtro, setFiltro] = useState("");
 
-  const librosFiltrados = libros.filter(libro => {  // <-- acá
-    const coincideBusqueda = libro.titulo.toLowerCase().includes(busqueda.toLowerCase());
-    const coincideCategoria = categoriaFiltro === "" || libro.categoria === categoriaFiltro;
-    return coincideBusqueda && coincideCategoria;
+  const librosFiltrados = libros.filter(libro => {
+    const matchBusqueda = libro.titulo.toLowerCase().includes(busqueda.toLowerCase()) ||
+      libro.autor.toLowerCase().includes(busqueda.toLowerCase());
+    const matchGenero = filtro === "" || libro.genero === filtro;
+    return matchBusqueda && matchGenero;
   });
 
   return (
-    <div className="secciones bg-red-400 p-10">
-
-      {/* Buscador */}
-      <div className="busqueda m-4">
-        <form
-          className="relative top-1/2 mt-2.5 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[50px] 
-          h-[50px] bg-white rounded-full border-4 border-white p-1 transition-all duration-1000 overflow-hidden hover:w-[300px] cursor-pointer"
-        >
-          <input
-            type="search"
-            placeholder="Buscar un Libro ..."
-            value={busqueda}
-            onChange={(e) => setBusqueda(e.target.value)}
-            className="absolute top-0 appearance-none left-0 w-full h-[42.5px] text-black outline-none border-none text-base rounded-[20px] px-5 hover:block peer"
-          />
-          <i
-            className="fa fa-search absolute top-0 right-0 w-[42.5px] h-[42.5px] rounded-full text-red-500 text-center text-[1.2em] flex items-center justify-center transition-all duration-1000 peer-hover:bg-text-red-500 peer-hover:text-red-500 hover:scale-110"
-          >🔍</i>
-        </form>
-
-        {/* Mostrar productos filtrados */}
-        {busqueda.trim() !== "" && (
-          <>
-            <p className="text-2xl font-bold text-center">Mostrando {librosFiltrados.length} de {libros.length} libros</p>
-
-            {librosFiltrados.length > 0 ? (
-              <TarjetaLibro libros={librosFiltrados} />
-            ) : (
-              <p className="text-center m-2.5">No se encontraron libros que coincidan con tu búsqueda.</p>
-            )}
-          </>
-        )}
+    <div>
+      {/* Hero */}
+      <div className="bg-gray-900">
+        <div className="max-w-7xl mx-auto px-6 py-14 sm:py-16 text-center">
+          <h1 className="font-display text-4xl sm:text-5xl font-bold text-white mb-3">
+            Catálogo
+          </h1>
+          <p className="text-gray-400 text-lg max-w-md mx-auto">
+            Encontrá tu próxima lectura entre todas nuestras categorías
+          </p>
+        </div>
       </div>
 
-      {
-        generos.map((genero) => {
-          const nombreGenero = genero.nombre;
-
-          return (
-            <section
-              key={genero.id}
-              id={nombreGenero.toLowerCase().replace(/\s/g, "")}
+      <div className="max-w-7xl mx-auto px-6 py-12">
+        {/* Search + filters */}
+        <div className="flex flex-col sm:flex-row gap-4 mb-12">
+          <div className="relative flex-1">
+            <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            <input
+              type="search"
+              placeholder="Buscar por título o autor..."
+              value={busqueda}
+              onChange={(e) => setBusqueda(e.target.value)}
+              className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-gray-200 bg-white text-sm outline-none focus:border-tinta-400 focus:ring-2 focus:ring-tinta-400/10 transition-all"
+            />
+          </div>
+          <div className="flex gap-2 flex-wrap">
+            <button
+              onClick={() => setFiltro("")}
+              className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                filtro === ""
+                  ? "bg-tinta-600 text-white shadow-sm"
+                  : "bg-white border border-gray-200 text-gray-600 hover:border-gray-300"
+              }`}
             >
-              <h1 className="font-bold text-5xl text-center m-5">{nombreGenero}</h1>
-              <p
-                className="text-center text-gray-800 font-bold mb-5.5"
-                id="descripcion-sec"
+              Todos
+            </button>
+            {generos.map(g => (
+              <button
+                key={g.id}
+                onClick={() => setFiltro(g.nombre)}
+                className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                  filtro === g.nombre
+                    ? "bg-tinta-600 text-white shadow-sm"
+                    : "bg-white border border-gray-200 text-gray-600 hover:border-gray-300"
+                }`}
               >
-                Ofrecemos los siguientes libros a continuación
-              </p>
+                {g.nombre}
+              </button>
+            ))}
+          </div>
+        </div>
 
-              <TarjetaLibro genero={nombreGenero} libros={libros} />  {/* acá también */}
+        {/* Results info */}
+        {busqueda.trim() !== "" && (
+          <div className="mb-8">
+            <p className="text-sm text-gray-500">
+              Mostrando <span className="font-semibold text-gray-900">{librosFiltrados.length}</span> de {libros.length} libros
+              {busqueda && <> para "<span className="text-tinta-600">{busqueda}</span>"</>}
+            </p>
+          </div>
+        )}
+
+        {/* Grid */}
+        {busqueda.trim() !== "" || filtro !== "" ? (
+          librosFiltrados.length > 0 ? (
+            <TarjetaLibro libros={librosFiltrados} />
+          ) : (
+            <div className="text-center py-20 bg-gray-50 rounded-2xl">
+              <svg className="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+              <p className="text-gray-500 text-lg font-medium mb-1">No se encontraron libros</p>
+              <p className="text-gray-400 text-sm">Probá con otro término de búsqueda</p>
+            </div>
+          )
+        ) : (
+          generos.map(genero => (
+            <section key={genero.id} id={genero.id} className="mb-16 scroll-mt-24">
+              <div className="flex items-center gap-4 mb-8">
+                <h2 className="font-display text-2xl font-bold text-gray-900">{genero.nombre}</h2>
+                <div className="flex-1 h-px bg-gray-200" />
+                <span className="text-sm text-gray-400">
+                  {libros.filter(l => l.genero === genero.nombre).length} libros
+                </span>
+              </div>
+              <TarjetaLibro genero={genero.nombre} libros={libros} />
             </section>
-          );
-        })
-      }
+          ))
+        )}
+      </div>
     </div>
   );
 }

@@ -3,122 +3,126 @@ import TarjetaLibro from "../componentes/TarjetaLibro";
 import { Toaster, toast } from "sonner";
 
 function Colaboracion({ agregarLibro }) {
-    const [titulo, setTitulo] = useState("");
-    const [autor, setAutor] = useState("");
-    const [descripcion, setDescripcion] = useState("");
-    const [genero, setGenero] = useState("");
-    const [librosNuevos, setLibrosNuevos] = useState([]);
+  const [titulo, setTitulo] = useState("");
+  const [autor, setAutor] = useState("");
+  const [descripcion, setDescripcion] = useState("");
+  const [genero, setGenero] = useState("");
+  const [librosNuevos, setLibrosNuevos] = useState([]);
 
-    const enviarFormulario = (e) => {
-        e.preventDefault();
+  const enviarFormulario = (e) => {
+    e.preventDefault();
 
-        const libroNuevo = {
-            titulo,
-            autor,
-            genero,
-            descripcion,
-            imagen: "/imagenes/PortadaGenerica.jpg",
-        };
-
-        agregarLibro(libroNuevo);
-
-        setLibrosNuevos([libroNuevo]);
-
-        toast.success("Libro creado exitosamente!");
-
-        setTitulo("");
-        setAutor("");
-        setGenero("");
-        setDescripcion("");
+    const libroNuevo = {
+      titulo,
+      autor,
+      genero,
+      descripcion,
+      imagen: "/imagenes/PortadaGenerica.jpg",
     };
 
-    return (
-        <div className="colaboracion bg-red-400 p-5">
-            <div className="descripcion">
-                <h1 className="text-2xl font-bold text-center p-2.5">
-                    ¡Colaborá con tus libros favoritos!
-                </h1>
-                <h2 className="text-white text-center font-medium">
-                    En Crónicas de Tinta ofrecemos a nuestros lectores la posibilidad de
-                    contribuir con sus libros favoritos.
-                </h2>
-                <p className="text-center font-medium m-2.5">
-                    A continuación, te proponemos un formulario para completar los datos
-                    del libro en cuestión.
-                </p>
+    agregarLibro(libroNuevo);
+    setLibrosNuevos([libroNuevo]);
+    toast.success("Libro agregado al catálogo");
+
+    setTitulo("");
+    setAutor("");
+    setGenero("");
+    setDescripcion("");
+  };
+
+  return (
+    <div>
+      {/* Hero */}
+      <div className="bg-gradient-to-br from-tinta-700 to-tinta-900">
+        <div className="max-w-7xl mx-auto px-6 py-14 sm:py-16 text-center">
+          <span className="badge badge-rose mb-4">Comunidad</span>
+          <h1 className="font-display text-4xl sm:text-5xl font-bold text-white mb-3">
+            Colaborá con nosotros
+          </h1>
+          <p className="text-white/50 text-lg max-w-lg mx-auto">
+            Sumá tus libros favoritos y ayudá a otros lectores a descubrir historias increíbles
+          </p>
+        </div>
+      </div>
+
+      <div className="max-w-3xl mx-auto px-6 py-16">
+        <div className="card-surface">
+          <h2 className="font-display text-xl font-bold text-gray-900 mb-8">Datos del libro</h2>
+          <form className="space-y-1" onSubmit={enviarFormulario}>
+            <div>
+              <label className="form-label">Título</label>
+              <input
+                required
+                className="input-field"
+                type="text"
+                placeholder="Título del libro"
+                value={titulo}
+                onChange={(e) => setTitulo(e.target.value)}
+              />
+            </div>
+            <div>
+              <label className="form-label">Autor</label>
+              <input
+                required
+                className="input-field"
+                type="text"
+                placeholder="Nombre del autor"
+                value={autor}
+                onChange={(e) => setAutor(e.target.value)}
+              />
+            </div>
+            <div>
+              <label className="form-label">Género</label>
+              <select
+                required
+                name="gen"
+                value={genero}
+                onChange={(e) => setGenero(e.target.value)}
+                className="input-field"
+              >
+                <option value="">Seleccioná género</option>
+                <option value="Romance">Romance</option>
+                <option value="Psicología">Psicología</option>
+                <option value="Ciencia Ficción">Ciencia Ficción</option>
+                <option value="Terror">Terror</option>
+              </select>
+            </div>
+            <div>
+              <label className="form-label">Descripción</label>
+              <input
+                required
+                className="input-field"
+                type="text"
+                placeholder="Breve descripción del libro"
+                value={descripcion}
+                onChange={(e) => setDescripcion(e.target.value)}
+              />
             </div>
 
-            <form
-                className="bg-amber-100 w-full h-100 m-auto flex items-center flex-col
-                 rounded-3xl p-8"
-                onSubmit={enviarFormulario}
-            >
-                <input
-                    required
-                    className="input-bg"
-                    type="text"
-                    placeholder="Título"
-                    value={titulo}
-                    onChange={(e) => setTitulo(e.target.value)}
-                />
-                <input
-                    required
-                    className="input-bg"
-                    type="text"
-                    placeholder="Autor"
-                    value={autor}
-                    onChange={(e) => setAutor(e.target.value)}
-                />
-                <select
-                    required
-                    name="gen"
-                    value={genero}
-                    onChange={(e) => setGenero(e.target.value)}
-                    className="mb-6 bg-pink-300 appearance-none p-2.5 rounded-2xl hover:scale-110"
-                >
-                    <option value="">Seleccioná género</option>
-                    <option value="Romance">Romance</option>
-                    <option value="Psicología">Psicología</option>
-                    <option value="Ciencia Ficción">Ciencia Ficción</option>
-                    <option value="Terror">Terror</option>
-                </select>
-                <input
-                    required
-                    className="input-bg"
-                    type="text"
-                    placeholder="Descripción"
-                    value={descripcion}
-                    onChange={(e) => setDescripcion(e.target.value)}
-                />
+            <Toaster position="top-center" richColors />
 
-                <Toaster position="top-center" richColors />
-
-                <button
-                    type="submit"
-                    className=" bg-pink-400 hover:bg-pink-300 hover:text-black hover:scale-110
-           text-white text-2xl font-bold py-3 px-8 rounded-3xl 
-           shadow-lg transition-colors duration-300"
-                >
-                    Enviar
-                </button>
-            </form>
-
-
-            {librosNuevos.length !== 0 && (
-                <div className="libNuevo flex flex-col items-center justify-center text-center min-h-[400px] mb-5">
-                    <h2 className="mb-4 font-bold text-2xl">
-                        Tu libro favorito ya se encuentra en Crónicas de Tinta!
-                    </h2>
-                    <div className="flex justify-center ml-100">
-                        <TarjetaLibro libros={librosNuevos} />
-                    </div>
-                </div>
-            )}
-
-
-
+            <button type="submit" className="btn-primary w-full mt-6">
+              Agregar libro
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
+            </button>
+          </form>
         </div>
-    );
+
+        {librosNuevos.length !== 0 && (
+          <div className="mt-14">
+            <div className="text-center mb-8">
+              <div className="w-14 h-14 rounded-2xl bg-green-50 flex items-center justify-center mx-auto mb-4">
+                <svg className="w-7 h-7 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+              </div>
+              <h3 className="font-display text-xl font-bold text-gray-900 mb-1">¡Libro agregado!</h3>
+              <p className="text-gray-500 text-sm">Ya podés verlo en el catálogo</p>
+            </div>
+            <TarjetaLibro libros={librosNuevos} />
+          </div>
+        )}
+      </div>
+    </div>
+  );
 }
 
 export default Colaboracion;

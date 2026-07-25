@@ -1,4 +1,68 @@
-@import 'tailwindcss';
-@import '../estilos/form.css' 
-/* uso el form.css debido a que habia muchos inputs y label */
+@import "tailwindcss";
+@import "./form.css";
 
+@theme {
+  --color-tinta-50: #fef2f2;
+  --color-tinta-100: #ffe1e1;
+  --color-tinta-200: #ffc8c8;
+  --color-tinta-300: #ffa2a2;
+  --color-tinta-400: #fb7171;
+  --color-tinta-500: #f43f3f;
+  --color-tinta-600: #e11d1d;
+  --color-tinta-700: #bd1414;
+  --color-tinta-800: #9b1414;
+  --color-tinta-900: #811818;
+
+  --color-crema-50: #fefdfb;
+  --color-crema-100: #fdf6e9;
+  --color-crema-200: #faecc8;
+  --color-crema-300: #f5dea0;
+  --color-crema-400: #eecb6e;
+  --color-crema-500: #e5b33e;
+
+  --color-rosa-50: #fef1f7;
+  --color-rosa-100: #fee5f0;
+  --color-rosa-200: #fecce3;
+  --color-rosa-300: #ffa2cb;
+  --color-rosa-400: #fd6ea8;
+  --color-rosa-500: #f93e89;
+  --color-rosa-600: #ea1c67;
+
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-body: "Inter", "Segoe UI", sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: #fafaf8;
+  color: #1a1a1a;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background-color: #fb7171;
+  color: white;
+}
+
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #e5e7eb, transparent);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.badge-rose {
+  background: linear-gradient(135deg, #f43f3f, #fd6ea8);
+  color: white;
+}

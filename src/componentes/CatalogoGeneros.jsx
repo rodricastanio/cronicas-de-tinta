@@ -1,10 +1,8 @@
 import TarjetaGenero from "./TarjetaGenero";
 
-function CatalogoGeneros({ generos }) { 
-    // generos es un "nombre de parámetro", el props
+function CatalogoGeneros({ generos }) {
   return (
-
-    <div className="bloques p-5.5 grid place-items-center">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
       {generos.map(genero => (
         <TarjetaGenero key={genero.id} genero={genero} />
       ))}

@@ -1,19 +1,27 @@
-
 const TarjetaGenero = ({ genero }) => {
   return (
-    <div className="bloque bg-amber-100 w-70 flex flex-col items-center 
-    justify-center gap-2.5 p-5.5 rounded-3xl min-h-[400px] hover:scale-105 mb-4.5">
-      <h3 className="font-bold text-2xl hover:text-gray-600 hover:scale-110 hover:underline"><a href={`secciones#${genero.id}`}>{genero.nombre}</a></h3>
-      <h5 className="font-bold text-gray-500">Destacado</h5>
-      <h4 className="font-bold text-1x1 ">{genero.destacado.titulo}</h4>
-      <figure>
-        <img
-          src={genero.destacado.imagen}
-          alt={`Portada de ${genero.destacado.titulo}`}
-        />
-        <figcaption>{genero.destacado.autor}</figcaption>
-      </figure>
-    </div>
+    <a
+      href={`secciones#${genero.id}`}
+      className="group relative block rounded-2xl overflow-hidden aspect-[4/5] cursor-pointer"
+    >
+      <img
+        src={genero.destacado.imagen}
+        alt={genero.nombre}
+        className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+      <div className="absolute inset-0 flex flex-col justify-end p-6">
+        <span className="badge badge-rose w-fit mb-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          Explorar
+        </span>
+        <h3 className="font-display text-2xl font-bold text-white mb-1">
+          {genero.nombre}
+        </h3>
+        <p className="text-white/50 text-sm">
+          {genero.destacado.titulo}
+        </p>
+      </div>
+    </a>
   );
 };
 
