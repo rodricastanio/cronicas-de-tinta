@@ -15,6 +15,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: rodricastanio/AuditGuard@v0.1.0-alpha.9
+      - uses: rodricastanio/AuditGuard@v0.1.0-alpha.10
         with:
           report-lang: 'es'
